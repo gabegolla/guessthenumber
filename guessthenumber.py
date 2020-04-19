@@ -1,10 +1,16 @@
 import random
 number = random.randint(1, 100)
 attempts = 0
+attempt_fails = {
+    '3': f"Don't give up! This is a number between {(number - 10)} and {(number + 10)}." if number > 10 else f"Don't give up! This number is lower than {(number + 10)}.",
+    '6': f"Maybe it's a bit too hard! This is a number between {(number - 5)} and {(number + 5)}." if number > 5 else f"Maybe it's a bit too hard! This number is lower than {(number + 5)}.",
+    '8': f"I thought it would be faster... This is a number between {(number - 2)} and {(number +2)}." if number > 2 else f"I thought it would be faster... This is a number between {(number - 2)} and {(number +2)}."
+}
 
-user_number = int(input("I'm thinking about the number between 1 and 100... Can you guess it? Please type an integer:"))
+user_number = int(input("I'm thinking about the number between 1 and 100... Can you guess in 10 attempts? "
+                        "Please type an integer:"))
 
-while number != "guess":
+while attempts < 10:
     if user_number < number:
         print(f"Nope, {user_number} is toooo low!")
     elif user_number > number:
@@ -13,17 +19,10 @@ while number != "guess":
         print(f"Yup, I was thinking about {user_number}! Congratulations, you needed {attempts} attempts to guess.")
         break
     attempts += 1
-    if attempts == 3 and number <= 10:
-        print(f"Don't give up! This number is lower than {(number + 10)}.")
-    elif attempts == 3:
-        print(f"Don't give up! This is a number between {(number - 10)} and {(number + 10)}.")
-    elif attempts == 6 and number <= 5:
-        print(f"Maybe it's a bit too hard! This number is lower than {(number + 5)}.")
-    elif attempts == 6:
-        print(f"Maybe it's a bit too hard! This is a number between {(number - 5)} and {(number + 5)}.")
-    elif attempts == 12 and number <= 2:
-        print(f"I thought it would be faster... This number is lower than {(number + 2)}.")
-    elif attempts == 12:
-        print(f"I thought it would be faster... This is a number between {(number - 2)} and {(number +2)}.")
+    fail_message = attempt_fails.get(str(attempts), 'Loading next try...')
+    print(fail_message)
     user_number = int(input("Try one more time: "))
-    
+
+if attempts == 10:
+    print("Sorry... Maybe next time you will guess!")
+
