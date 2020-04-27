@@ -6,7 +6,7 @@ difficulty_level = {
     'normal': 60,
     'hard': 100
 }
-level = (input(f"First choose difficulty level: ")).lower()
+level = (input("First choose difficulty level: ")).lower()
 number = random.randint(1, difficulty_level.get(level))
 attempt_fails = {
     3: f"Don't give up! This is a number between {(number - 10)} and {(number + 10)}." if number > 10 else f"Don't give up! This number is lower than {(number + 10)}.",
